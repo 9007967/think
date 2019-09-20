@@ -3,8 +3,11 @@ declare (strict_types = 1);
 
 namespace app;
 
-use think\{ App, Validate, Response };
-use think\exception\{ ValidateException, HttpResponseException };
+use think\App;
+use think\Validate;
+use think\Response;
+use think\exception\ValidateException;
+use think\exception\HttpResponseException;
 
 /**
  * 控制器基础类
@@ -66,10 +69,10 @@ abstract class BaseController
     /**
      * 请求类型验证
      */
-    protected function verifyMethod(){
+    protected function verifyMethod() {
         $request = $this->app->request;
         $method = $this->method;
-        if(isset($method[$request->action()]) and !in_array($request->method(),$method[$request->action()])){
+        if(isset($method[$request->action()]) and !in_array($request->method(), $method[$request->action()])){
             $response = Response::create()->code(404)->header([]);
             throw new HttpResponseException($response);
         }
